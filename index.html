@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-ar="مولد الصور بالذكاء الاصطناعي" data-en="AI Image Generator">مولد الصور بالذكاء الاصطناعي</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">
+                    <i class="fas fa-magic"></i>
+                    <span data-ar="مولد الصور بالذكاء الاصطناعي" data-en="AI Image Generator">مولد الصور بالذكاء الاصطناعي</span>
+                </h1>
+                <div class="header-controls">
+                    <!-- Language Toggle -->
+                    <button class="btn-icon" id="languageToggle" title="تغيير اللغة">
+                        <i class="fas fa-language"></i>
+                    </button>
+                    <!-- Theme Toggle -->
+                    <button class="btn-icon" id="themeToggle" title="تغيير الوضع">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- API Key Section -->
+            <section class="api-section">
+                <div class="card">
+                    <h2 data-ar="إعداد مفتاح API" data-en="API Key Setup">إعداد مفتاح API</h2>
+                    <div class="input-group">
+                        <label for="apiKey" data-ar="مفتاح Gemini API" data-en="Gemini API Key">مفتاح Gemini API</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="apiKey" placeholder="أدخل مفتاح API الخاص بك" data-ar-placeholder="أدخل مفتاح API الخاص بك" data-en-placeholder="Enter your API key">
+                            <button type="button" class="btn-toggle-password" id="toggleApiKey">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <small class="help-text">
+                            <span data-ar="احصل على مفتاح API مجاني من" data-en="Get a free API key from">احصل على مفتاح API مجاني من</span>
+                            <a href="https://makersuite.google.com/app/apikey" target="_blank">Google AI Studio</a>
+                        </small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Image Generation Section -->
+            <section class="generation-section">
+                <div class="card">
+                    <h2 data-ar="توليد الصورة" data-en="Generate Image">توليد الصورة</h2>
+                    <form id="imageForm">
+                        <div class="input-group">
+                            <label for="prompt" data-ar="وصف الصورة" data-en="Image Description">وصف الصورة</label>
+                            <textarea id="prompt" rows="4" placeholder="اكتب وصفاً مفصلاً للصورة التي تريد توليدها..." data-ar-placeholder="اكتب وصفاً مفصلاً للصورة التي تريد توليدها..." data-en-placeholder="Write a detailed description of the image you want to generate..."></textarea>
+                            <div class="char-counter">
+                                <span id="charCount">0</span> / 500
+                            </div>
+                            <small class="help-text">
+                                <i class="fas fa-lightbulb"></i>
+                                <span data-ar="نصيحة: كن محدداً في الوصف. اذكر الألوان، الأحجام، الإضاءة، والتفاصيل للحصول على صورة دقيقة" data-en="Tip: Be specific in your description. Mention colors, sizes, lighting, and details for accurate results">نصيحة: كن محدداً في الوصف. اذكر الألوان، الأحجام، الإضاءة، والتفاصيل للحصول على صورة دقيقة</span>
+                            </small>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="imageStyle" data-ar="نمط الصورة" data-en="Image Style">نمط الصورة</label>
+                            <select id="imageStyle">
+                                <option value="realistic" data-ar="واقعي" data-en="Realistic">واقعي</option>
+                                <option value="artistic" data-ar="فني" data-en="Artistic">فني</option>
+                                <option value="cartoon" data-ar="كرتوني" data-en="Cartoon">كرتوني</option>
+                                <option value="photography" data-ar="تصوير فوتوغرافي" data-en="Photography">تصوير فوتوغرافي</option>
+                                <option value="painting" data-ar="لوحة فنية" data-en="Painting">لوحة فنية</option>
+                                <option value="digital-art" data-ar="فن رقمي" data-en="Digital Art">فن رقمي</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="imageQuality" data-ar="جودة الصورة" data-en="Image Quality">جودة الصورة</label>
+                            <select id="imageQuality">
+                                <option value="standard" data-ar="عادية" data-en="Standard">عادية</option>
+                                <option value="high" data-ar="عالية" data-en="High">عالية</option>
+                                <option value="ultra" data-ar="فائقة" data-en="Ultra">فائقة</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="removeWatermark" checked>
+                                <span class="checkmark"></span>
+                                <span data-ar="إزالة العلامات المائية" data-en="Remove Watermarks">إزالة العلامات المائية</span>
+                            </label>
+                        </div>
+                        
+                        <div class="examples-section">
+                            <details>
+                                <summary data-ar="أمثلة على أوصاف جيدة" data-en="Examples of good descriptions">أمثلة على أوصاف جيدة</summary>
+                                <div class="examples-list">
+                                    <div class="example-item" onclick="document.getElementById('prompt').value = this.textContent.trim()">
+                                        <span data-ar="قطة بيضاء جميلة ذات عيون زرقاء تجلس على نافذة مشمسة، فراء ناعم، إضاءة طبيعية دافئة" data-en="Beautiful white cat with blue eyes sitting on a sunny window, soft fur, warm natural lighting">قطة بيضاء جميلة ذات عيون زرقاء تجلس على نافذة مشمسة، فراء ناعم، إضاءة طبيعية دافئة</span>
+                                    </div>
+                                    <div class="example-item" onclick="document.getElementById('prompt').value = this.textContent.trim()">
+                                        <span data-ar="منظر طبيعي خلاب لجبال مغطاة بالثلج عند غروب الشمس، سماء برتقالية وردية، بحيرة زرقاء صافية" data-en="Breathtaking landscape of snow-covered mountains at sunset, orange-pink sky, clear blue lake">منظر طبيعي خلاب لجبال مغطاة بالثلج عند غروب الشمس، سماء برتقالية وردية، بحيرة زرقاء صافية</span>
+                                    </div>
+                                    <div class="example-item" onclick="document.getElementById('prompt').value = this.textContent.trim()">
+                                        <span data-ar="سيارة رياضية حمراء لامعة تقف أمام مبنى حديث، تصوير احترافي، إضاءة مثالية، تفاصيل واضحة" data-en="Shiny red sports car in front of modern building, professional photography, perfect lighting, sharp details">سيارة رياضية حمراء لامعة تقف أمام مبنى حديث، تصوير احترافي، إضاءة مثالية، تفاصيل واضحة</span>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+
+                        <button type="submit" class="btn-primary" id="generateBtn">
+                            <i class="fas fa-magic"></i>
+                            <span data-ar="توليد الصورة" data-en="Generate Image">توليد الصورة</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section class="result-section" id="resultSection" style="display: none;">
+                <div class="card">
+                    <h2 data-ar="النتيجة" data-en="Result">النتيجة</h2>
+                    <div class="image-container" id="imageContainer">
+                        <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+                            <div class="spinner"></div>
+                            <p data-ar="جاري توليد الصورة..." data-en="Generating image...">جاري توليد الصورة...</p>
+                        </div>
+                        <div class="image-result" id="imageResult" style="display: none;">
+                            <img id="generatedImage" alt="Generated Image">
+                            <div class="image-actions">
+                                <button class="btn-secondary" id="downloadBtn">
+                                    <i class="fas fa-download"></i>
+                                    <span data-ar="تحميل" data-en="Download">تحميل</span>
+                                </button>
+                                <button class="btn-secondary" id="copyBtn">
+                                    <i class="fas fa-copy"></i>
+                                    <span data-ar="نسخ الرابط" data-en="Copy Link">نسخ الرابط</span>
+                                </button>
+                                <button class="btn-secondary" id="newImageBtn">
+                                    <i class="fas fa-plus"></i>
+                                    <span data-ar="صورة جديدة" data-en="New Image">صورة جديدة</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p data-ar="تم تطوير هذا الموقع بواسطة Team Mohaned" data-en="Developed by Team Mohaned">تم تطوير هذا الموقع بواسطة Team Mohaned</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="utils/helpers.js"></script>
+    <script src="api/gemini.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
