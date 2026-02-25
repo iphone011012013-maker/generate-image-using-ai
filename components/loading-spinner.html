@@ -1,1 +1,291 @@
+<!-- Loading Spinner Component -->
+<!-- This is a reusable loading spinner component that can be included in other pages -->
 
+<div class="loading-spinner-component">
+    <style>
+        .loading-spinner-component {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .spinner-wrapper {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .spinner-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+
+        .spinner-ring:nth-child(1) {
+            border-top-color: var(--primary-color);
+            animation-delay: 0s;
+        }
+
+        .spinner-ring:nth-child(2) {
+            border-right-color: var(--primary-color);
+            animation-delay: 0.3s;
+            opacity: 0.8;
+        }
+
+        .spinner-ring:nth-child(3) {
+            border-bottom-color: var(--primary-color);
+            animation-delay: 0.6s;
+            opacity: 0.6;
+        }
+
+        .spinner-ring:nth-child(4) {
+            border-left-color: var(--primary-color);
+            animation-delay: 0.9s;
+            opacity: 0.4;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .spinner-dots {
+            display: inline-block;
+        }
+
+        .spinner-dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% {
+                content: '';
+            }
+            40% {
+                content: '.';
+            }
+            60% {
+                content: '..';
+            }
+            80%, 100% {
+                content: '...';
+            }
+        }
+
+        /* Progress bar variant */
+        .progress-spinner {
+            width: 100%;
+            max-width: 300px;
+            margin: 1rem 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background-color: var(--bg-secondary);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+            border-radius: 2px;
+            animation: progress 2s ease-in-out infinite;
+        }
+
+        @keyframes progress {
+            0% {
+                width: 0%;
+                margin-left: 0%;
+            }
+            50% {
+                width: 75%;
+                margin-left: 0%;
+            }
+            100% {
+                width: 0%;
+                margin-left: 100%;
+            }
+        }
+
+        /* Pulse variant */
+        .pulse-spinner {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Dots variant */
+        .dots-spinner {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            animation: bounce 1.4s ease-in-out infinite both;
+        }
+
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+        .dot:nth-child(3) { animation-delay: 0s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        /* Size variants */
+        .spinner-small {
+            transform: scale(0.7);
+        }
+
+        .spinner-large {
+            transform: scale(1.3);
+        }
+
+        /* Theme variants */
+        .spinner-light {
+            --spinner-color: #ffffff;
+        }
+
+        .spinner-dark {
+            --spinner-color: var(--text-primary);
+        }
+    </style>
+
+    <!-- Default Ring Spinner -->
+    <div class="spinner-wrapper">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+    </div>
+
+    <!-- Loading Text -->
+    <div class="spinner-text">
+        <span data-ar="جاري التحميل" data-en="Loading">جاري التحميل</span>
+        <span class="spinner-dots"></span>
+    </div>
+
+    <!-- Progress Bar (Alternative) -->
+    <div class="progress-spinner" style="display: none;">
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Alternative Spinner Variants (Hidden by default) -->
+<div class="spinner-variants" style="display: none;">
+    <!-- Pulse Spinner -->
+    <div class="loading-spinner-component">
+        <div class="pulse-spinner"></div>
+        <div class="spinner-text">
+            <span data-ar="جاري المعالجة" data-en="Processing">جاري المعالجة</span>
+        </div>
+    </div>
+
+    <!-- Dots Spinner -->
+    <div class="loading-spinner-component">
+        <div class="dots-spinner">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <div class="spinner-text">
+            <span data-ar="يرجى الانتظار" data-en="Please wait">يرجى الانتظار</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript for dynamic spinner control
+    class SpinnerComponent {
+        constructor(container) {
+            this.container = container;
+            this.textElement = container.querySelector('.spinner-text span');
+            this.dotsElement = container.querySelector('.spinner-dots');
+        }
+
+        // Update spinner text
+        updateText(text) {
+            if (this.textElement) {
+                this.textElement.textContent = text;
+            }
+        }
+
+        // Show/hide spinner
+        show() {
+            this.container.style.display = 'flex';
+        }
+
+        hide() {
+            this.container.style.display = 'none';
+        }
+
+        // Change spinner variant
+        setVariant(variant) {
+            const variants = ['ring', 'pulse', 'dots', 'progress'];
+            variants.forEach(v => {
+                this.container.classList.remove(`spinner-${v}`);
+            });
+            this.container.classList.add(`spinner-${variant}`);
+        }
+
+        // Set spinner size
+        setSize(size) {
+            const sizes = ['small', 'normal', 'large'];
+            sizes.forEach(s => {
+                this.container.classList.remove(`spinner-${s}`);
+            });
+            if (size !== 'normal') {
+                this.container.classList.add(`spinner-${size}`);
+            }
+        }
+    }
+
+    // Make SpinnerComponent available globally
+    if (typeof window !== 'undefined') {
+        window.SpinnerComponent = SpinnerComponent;
+    }
+</script>
